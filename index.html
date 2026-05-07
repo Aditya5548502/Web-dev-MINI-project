@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matoshri Eats | Premium Delivery</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CSS Variables for easy theming */
+        :root {
+            --primary-color: #ff6b6b;
+            --secondary-color: #4ecdc4;
+            --dark-color: #2d3436;
+            --light-color: #f7f9fc;
+            --white: #ffffff;
+            --shadow: 0 10px 20px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        header {
+            background: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .cart-btn {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .cart-btn:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, #fff9f9 0%, #fff0f0 100%);
+            min-height: 70vh;
+        }
+
+        .hero-content {
+            flex: 1;
+            padding-right: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+        }
+
+        .hero h1 span {
+            color: var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #636e72;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .cta-btn {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+            transition: var(--transition);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.6);
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: right;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Floating animation for hero image */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Menu Section */
+        .menu-section {
+            padding: 5rem 5%;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            color: #636e72;
+            margin-bottom: 3rem;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        /* Food Cards */
+        .food-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: left;
+            position: relative;
+        }
+
+        .food-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+        }
+
+        .food-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .food-tags {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .tag {
+            background: #e1f5fe;
+            color: #0288d1;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .tag.protein {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .food-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .food-desc {
+            color: #636e72;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            height: 45px;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+        }
+
+        .price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .add-btn {
+            background: var(--dark-color);
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .add-btn:hover {
+            background: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 5%;
+            margin-top: 4rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 2rem;
+            }
+            .hero-content {
+                padding-right: 0;
+                margin-bottom: 3rem;
+            }
+            nav ul {
+                display: none; /* In a real app, you'd add a hamburger menu here */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <a href="#" class="logo">
+            <i class="fa-solid fa-leaf"></i> Matoshri Eats
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Menu</a></li>
+                <li><a href="#">Offers</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <a href="#" class="cart-btn">
+            <i class="fa-solid fa-basket-shopping"></i> Cart (0)
+        </a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Fuel Your Body with <span>Premium Quality</span> Meals</h1>
+            <p>Skip the cooking, not the nutrition. Get high-protein, fresh, and delicious vegetarian meals delivered piping hot to your door anywhere in Kolhapur.</p>
+            <button class="cta-btn">Explore Menu <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
+        </div>
+        <div class="hero-image">
+            <!-- Using a placeholder image for food -->
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fresh Healthy Food">
+        </div>
+    </section>
+
+    <!-- Featured Menu Section -->
+    <section class="menu-section">
+        <h2 class="section-title">Our Top Picks</h2>
+        <p class="section-subtitle">Specially curated for a healthy, active lifestyle</p>
+
+        <div class="menu-grid">
+            
+            <!-- Menu Item 1 -->
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Paneer Tikka" class="food-img">
+                <div class="card-content">
+                    <div class="food-tags">
+                        <span class="tag">Bestseller</span>
+                        <span class="tag protein">High Protein</span>
+                    </div>
+                    <h3 class="food-title">Grilled Paneer Bowl</h3>
+                    <p class="food-desc">Fresh paneer marinated in pure spices, served with a side of zero-oil mixed veggies.</p>
+                    <div class="card-footer">
+                        <span class="price">₹220</span>
+                        <button class="add-btn"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu Item 2 -->
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sprout Salad" class="food-img">
+                <div class="card-content">
+                    <div class="food-tags">
+                        <span class="tag">Healthy</span>
+                        <span class="tag protein">High Protein</span>
+                    </div>
+                    <h3 class="food-title">Power Sprout Salad</h3>
+                    <p class="food-desc">Crunchy moong sprouts, fresh cucumber, tomatoes, and a tangy lemon dressing.</p>
+                    <div class="card-footer">
+                        <span class="price">₹140</span>
+                        <button class="add-btn"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu Item 3 -->
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1626074353765-517a681e40be?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sattu Paratha" class="food-img">
+                <div class="card-content">
+                    <div class="food-tags">
+                        <span class="tag">Traditional</span>
+                    </div>
+                    <h3 class="food-title">Sattu Stuffed Paratha</h3>
+                    <p class="food-desc">Authentic roasted gram flour stuffed parathas served with a side of fresh thick curd.</p>
+                    <div class="card-footer">
+                        <span class="price">₹180</span>
+                        <button class="add-btn"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Matoshri Eats. All rights reserved. Crafted with care.</p>
+    </footer>
+
+</body>
+</html>

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* CSS Variables for easy theming */
+        /* CSS Variables */
         :root {
             --primary-color: #ff6b6b;
             --secondary-color: #4ecdc4;
@@ -26,6 +26,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth; /* Enables smooth scrolling */
         }
 
         body {
@@ -155,7 +156,6 @@
             animation: float 6s ease-in-out infinite;
         }
 
-        /* Floating animation for hero image */
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
@@ -275,6 +275,11 @@
             background: var(--primary-color);
         }
 
+        /* Success state for Add button */
+        .add-btn.success {
+            background: var(--secondary-color);
+        }
+
         /* Footer */
         footer {
             background: var(--dark-color);
@@ -296,7 +301,7 @@
                 margin-bottom: 3rem;
             }
             nav ul {
-                display: none; /* In a real app, you'd add a hamburger menu here */
+                display: none; 
             }
         }
     </style>
@@ -311,13 +316,13 @@
         <nav>
             <ul>
                 <li><a href="#">Home</a></li>
-                <li><a href="#">Menu</a></li>
+                <li><a href="#menu">Menu</a></li>
                 <li><a href="#">Offers</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
         </nav>
-        <a href="#" class="cart-btn">
-            <i class="fa-solid fa-basket-shopping"></i> Cart (0)
+        <a href="#" class="cart-btn" id="cartButton">
+            <i class="fa-solid fa-basket-shopping"></i> <span id="cartCount">Cart (0)</span>
         </a>
     </header>
 
@@ -326,16 +331,15 @@
         <div class="hero-content">
             <h1>Fuel Your Body with <span>Premium Quality</span> Meals</h1>
             <p>Skip the cooking, not the nutrition. Get high-protein, fresh, and delicious vegetarian meals delivered piping hot to your door anywhere in Kolhapur.</p>
-            <button class="cta-btn">Explore Menu <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
+            <button class="cta-btn" id="exploreBtn">Explore Menu <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
         </div>
         <div class="hero-image">
-            <!-- Using a placeholder image for food -->
             <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fresh Healthy Food">
         </div>
     </section>
 
     <!-- Featured Menu Section -->
-    <section class="menu-section">
+    <section class="menu-section" id="menu">
         <h2 class="section-title">Our Top Picks</h2>
         <p class="section-subtitle">Specially curated for a healthy, active lifestyle</p>
 
@@ -399,5 +403,43 @@
         <p>&copy; 2026 Matoshri Eats. All rights reserved. Crafted with care.</p>
     </footer>
 
+    <!-- Interactive Javascript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Smooth Scroll for Explore Button
+            const exploreBtn = document.getElementById('exploreBtn');
+            const menuSection = document.getElementById('menu');
+
+            exploreBtn.addEventListener('click', () => {
+                menuSection.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // 2. Add to Cart Functionality
+            const addButtons = document.querySelectorAll('.add-btn');
+            const cartCountDisplay = document.getElementById('cartCount');
+            let totalItems = 0;
+
+            addButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Update Cart Total
+                    totalItems++;
+                    cartCountDisplay.textContent = `Cart (${totalItems})`;
+                    
+                    // Visual Feedback Animation
+                    const originalContent = this.innerHTML;
+                    this.innerHTML = '<i class="fa-solid fa-check"></i>';
+                    this.classList.add('success'); // Adds green background via CSS
+                    
+                    // Revert button back to normal after 1.5 seconds
+                    setTimeout(() => {
+                        this.innerHTML = originalContent;
+                        this.classList.remove('success');
+                    }, 1500);
+                });
+            });
+
+        });
+    </script>
 </body>
 </html>
